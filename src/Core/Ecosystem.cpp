@@ -220,7 +220,6 @@ void Ecosystem::Render(SDL_Renderer *renderer) const
     {
         entity->Render(renderer);
     }
-    6. Système Graphique avec SDL3
-}
+ }
 } // namespace Core
 } // namespace Ecosystem

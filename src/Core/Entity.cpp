@@ -213,10 +213,11 @@ namespace Ecosystem
                     position.x - size / 2.0f,
                     position.y - size / 2.0f - 3.0f,
                     energyBarWidth,
-                    2.0f};
+                    2.0f
+                };
                 SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
                 SDL_RenderFillRect(renderer, &energyBar);
- }
+           }
         }
     } // namespace Core
 } // namespace Ecosystem

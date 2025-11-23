@@ -1,6 +1,6 @@
 // Window.hpp
 #pragma once
-#include "../Core/Structs.hpp"
+#include "Core/Structs.h"
 #include <SDL3/SDL.h>
 #include <string>
 namespace Ecosystem

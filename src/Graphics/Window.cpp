@@ -1,5 +1,5 @@
 // Window.cpp
-#include "Graphics/Window.hpp"
+#include "Graphics/Window.h"
 #include <iostream>
 namespace Ecosystem
 {
@@ -23,39 +23,48 @@ namespace Ecosystem
                 return false;
             }
             mWindow = SDL_CreateWindow(mTitle.c_str(),
+                               SDL_WINDOWPOS_CENTERED,
+                               SDL_WINDOWPOS_CENTERED,
                                        static_cast<int>(mWidth),
                                        static_cast<int>(mHeight),
-                                       0);
+                                       SDL_WINDOW_SHOWN);
             if (!mWindow)
             {
                 std::cerr << "❌ Erreur création fenêtre: " << SDL_GetError() << std::endl;
                 SDL_Quit();
                 return false;
             }
-            mRenderer = SDL_CreateRenderer(mWindow, NULL);
+            mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
             if (!mRenderer)
             {
-                std::cerr << "❌ Erreur création renderer: " << SDL_GetError() << std::endl SDL_DestroyWindow(mWindow);
+                std::cerr << "❌ Erreur création renderer: " << SDL_GetError() << std::endl;
+                 SDL_DestroyWindow(mWindow);
                 SDL_Quit();
                 return false;
             }
             mIsInitialized = true;
-            std::cout << "✅ Fenêtre initialisée: " << mTitle << " (" << mWidth << "x" << m return true;
+            std::cout << "✅ Fenêtre initialisée: " << mTitle << " (" << mWidth << "x" << mHeight << ")" <<std::endl;
+             return true;
         }
         // 🧹 FERMETURE
         void Window::Shutdown()
         {
+            if(!mIsInitialized){
+                return;
+            }
             if (mRenderer)
             {
                 SDL_DestroyRenderer(mRenderer);
-                mRenderer = nullptr;
+                
             }
             if (mWindow)
             {
                 SDL_DestroyWindow(mWindow);
-                mWindow = nullptr;
+               
             }
             SDL_Quit();
+            mRenderer = nullptr;
+            mWindow = nullptr;
             mIsInitialized = false;
             std::cout << "🔄 Fenêtre fermée" << std::endl;
         }

@@ -1,5 +1,5 @@
 // Ecosystem.cpp
-#include "include/core/Ecosystem.hpp"
+#include "core/Ecosystem.h"
 #include <algorithm>
 #include <iostream>
 namespace Ecosystem
@@ -21,7 +21,7 @@ namespace Ecosystem
             std::cout << "🌍 Écosystème détruit (" << mEntities.size() << " entités nettoyé avec succes)" << std::endl;
         }
         // ⚙️ INITIALISATION
-        void Ecosystem::Initialize(int initialHerbivores, int initialCarnivores, int initialplants)
+        void Ecosystem::Initialize(int initialHerbivores, int initialCarnivores, int initialPlants)
         {
             mEntities.clear();
             mFoodSources.clear();

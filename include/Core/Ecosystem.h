@@ -1,6 +1,6 @@
 #pragma once
-#include "Entity.hpp"
-#include "Structs.hpp"
+#include "Entity.h"
+#include "Structs.h"
 #include <memory>
 #include <random>
 #include <vector>

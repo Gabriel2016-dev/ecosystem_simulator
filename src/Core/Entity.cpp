@@ -1,5 +1,5 @@
 // Entity.cpp
-#include "Core/Entity.hpp"
+#include "Core/Entity.h"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -44,7 +44,7 @@ namespace Ecosystem
             mIsAlive = true;
             mVelocity = GenerateRandomDirection();
 
-            std::cout << "🌱 Entité créée: " << name << " à (" << position.x << ", " << pos
+            std::cout << "🌱 Entité créée: " << name << " à (" << position.x << ", " << position.y << ")" << std::endl;
         }
         // CONSTRUCTEUR DE COPIE
         Entity::Entity(const Entity &other)
@@ -64,7 +64,7 @@ namespace Ecosystem
         // DESTRUCTEUR
         Entity::~Entity()
         {
-            std::cout << "💀 Entité détruite: " << name << " (Âge: " << mAge << ")" << std:
+            std::cout << "💀 Entité détruite: " << name << " (Âge: " << mAge << ")" << std::endl;
         }
         // ⚙️ MISE À JOUR PRINCIPALE
         void Entity::Update(float deltaTime)
@@ -105,7 +105,7 @@ namespace Ecosystem
             {
                 mEnergy = mMaxEnergy;
             }
-            std::cout << " " << name << " mange et gagne " << energy << " énergie" << std
+            std::cout << " " << name << " mange et gagne " << energy << " énergie" << std::endl;
         }
         // 🔄 CONSOMMATION D'ÉNERGIE
         void Entity::ConsumeEnergy(float deltaTime)

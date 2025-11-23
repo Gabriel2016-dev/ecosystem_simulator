@@ -14,7 +14,7 @@ namespace Ecosystem
             // 🔒 ÉTAT INTERNE
             std::vector<std::unique_ptr<Entity>> mEntities;
             std::vector<Food> mFoodSources;
-            std::vector<Entity> mEntities;
+            
             float mWorldWidth;
             float mWorldHeight;
             int mMaxEntities;
@@ -47,11 +47,12 @@ namespace Ecosystem
             void HandleEating();
 
             // 📊 GETTERS
-            int GetEntityCount() const
+            size_t GetEntityCount() const
             {
                 return mEntities.size();
             }
-            🔧5. Implémentation de la Classe Ecosystem int GetFoodCount() const
+            //Implémentation de la Classe Ecosystem 
+            int GetFoodCount() const
             {
                 return mFoodSources.size();
             }
@@ -74,7 +75,7 @@ namespace Ecosystem
 
             // 🎨 RENDU
             void Render(SDL_Renderer *renderer) const;
-            size_t GetEntityCount() const;
+           
 
         private:
             // 🔐 MÉTHODES PRIVÉES

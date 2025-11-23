@@ -221,5 +221,8 @@ void Ecosystem::Render(SDL_Renderer *renderer) const
         entity->Render(renderer);
     }
  }
+ size_t Ecosystem::GetEntityCount() const{
+    return mEntities.size();
+ }
 } // namespace Core
 } // namespace Ecosystem

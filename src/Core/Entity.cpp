@@ -203,7 +203,7 @@ namespace Ecosystem
                 size,
                 size};
 
- SDL_SetRenderDrawColor(renderer, renderColor.r, renderColor.g, renderColor.b, r
+ SDL_SetRenderDrawColor(renderer, renderColor.r, renderColor.g, renderColor.b, renderer.a);
  SDL_RenderFillRect(renderer, &rect);
  
  // 🔵 Indicateur d'énergie (barre de vie)

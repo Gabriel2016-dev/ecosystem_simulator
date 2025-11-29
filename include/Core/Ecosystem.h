@@ -21,6 +21,7 @@ namespace Ecosystem
             int mDayCycle;
 
             // 🎲 Générateur aléatoire
+           
             std::mt19937 mRandomGenerator;
 
             // 📊 STATISTIQUES
@@ -81,7 +82,7 @@ namespace Ecosystem
             // 🔐 MÉTHODES PRIVÉES
             void UpdateStatistics();
             void SpawnRandomEntity(EntityType type);
-            Vector2D GetRandomPosition() const;
+            Vector2D GetRandomPosition();
             void HandlePlantGrowth(float deltaTime);
         };
     } // namespace Core

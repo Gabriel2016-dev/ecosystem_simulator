@@ -2,6 +2,7 @@
 #include "core/Ecosystem.h"
 #include <algorithm>
 #include <iostream>
+#include <random>
 namespace Ecosystem
 {
     namespace Core
@@ -146,7 +147,7 @@ namespace Ecosystem
             mStats.totalPlants = 0;
             mStats.totalFood = mFoodSources.size();
 
-            for (const auto &entity : mEntity)
+            for (const auto &entity : mEntities)
             {
                 switch (entity->GetType())
                 {
@@ -187,7 +188,7 @@ namespace Ecosystem
             mEntities.push_back(std::make_unique<Entity>(type, position, name));
         }
         // 🎯 POSITION ALÉATOIRE
-        Vector2D Ecosystem::GetRandomPosition() const
+        Vector2D Ecosystem::GetRandomPosition()
         {
             std::uniform_real_distribution<float> distX(0.0f, mWorldWidth);
             std::uniform_real_distribution<float> distY(0.0f, mWorldHeight);
@@ -224,9 +225,6 @@ namespace Ecosystem
                 entity->Render(renderer);
             }
         }
-        size_t Ecosystem::GetEntityCount() const
-        {
-            return mEntities.size();
-        }
+       
     } // namespace Core
 } // namespace Ecosystem

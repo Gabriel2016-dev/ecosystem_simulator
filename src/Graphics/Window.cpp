@@ -23,18 +23,17 @@ namespace Ecosystem
                 return false;
             }
             mWindow = SDL_CreateWindow(mTitle.c_str(),
-                               SDL_WINDOWPOS_CENTERED,
-                               SDL_WINDOWPOS_CENTERED,
+                               
                                        static_cast<int>(mWidth),
                                        static_cast<int>(mHeight),
-                                       SDL_WINDOW_SHOWN);
+                                       SDL_WINDOW_RESIZABLE);
             if (!mWindow)
             {
                 std::cerr << "❌ Erreur création fenêtre: " << SDL_GetError() << std::endl;
                 SDL_Quit();
                 return false;
             }
-            mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
+            mRenderer = SDL_CreateRenderer(mWindow, NULL);
             if (!mRenderer)
             {
                 std::cerr << "❌ Erreur création renderer: " << SDL_GetError() << std::endl;

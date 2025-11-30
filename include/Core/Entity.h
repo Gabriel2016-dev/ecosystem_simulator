@@ -6,7 +6,7 @@
 #include <random>
 #include <string>
 #include <vector>
-Vector2D seekfood(std::vector<foodsource> &foods) const
+Vector2D seekfood(std::vector<foodsource> &foods, const Ecosystem& eco) const
 {
     if (foods.empty())
     {
@@ -31,7 +31,7 @@ Vector2D seekfood(std::vector<foodsource> &foods) const
     Vector2D desired = (closest-position - posiiton).Normalized() * mMaxspeed;
     return (desired -mVelocity).Clamped(mMacforce);
 }
-Vector2D AvoidPredator(std::vector<Entity> entities) const
+Vector2D AvoidPredators(std::vector<Entity> entities, const Ecosystem& eco) const
 {
     Vector2D force(0, 0);
     float dangerR = 80.0f;
@@ -54,7 +54,7 @@ Vector2D AvoidPredator(std::vector<Entity> entities) const
     }
     return force.Clamped(mMaxforce);
 }
-Vector2D StayInBounds(float width, float height) const
+Vector2D StayInBounds(float width, float height, const Ecosystem& eco) const
 {
     float margin = 30.0f;
     Vector2D correction(0, 0);

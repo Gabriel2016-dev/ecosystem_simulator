@@ -81,9 +81,14 @@ namespace Ecosystem
         // 🚶 MOUVEMENT
         void Entity::Move(float deltaTime)
         {
-            if (mType == EntityType::PLANT)
+            if (mType == EntityType::PLANT){
                 return; // Les plantes ne bougent pas
-
+            }
+            Vector2D force(0, 0);
+            force += seekfood();
+            force += AvoidPredators();
+            force += StayInBounds();
+            ApplyForce(force);
             // 🎲 Comportement aléatoire occasionnel
             std::uniform_real_distribution<float> chance(0.0f, 1.0f);
             if (chance(mRandomGenerator) < 0.02f)

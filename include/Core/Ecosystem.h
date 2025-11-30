@@ -3,7 +3,33 @@
 #include "Structs.h"
 #include <memory>
 #include <random>
+#include <string>
 #include <vector>
+void AddEntity(EntityType type, constVector2D &pos)
+{
+    if (mEntities.size() >= mMaxentities)
+    {
+        return;
+    }
+    std::string name;
+    switch (type)
+    {
+        caseEntityType::HERBIVORE : name = "Herbivore_" + std::to_string(mStats.totalHerbivores);
+        break;
+        caseEntityType::CARNIVORE : name = "Carnivore_" + std::to_string(mStats.totalCarnivores);
+        break;
+        caseEntityType::PLANT : name = "Plant_" + std::to_string(mStats.totalPlants);
+        break;
+    }
+    mEntities.push_back(std::make_unique<Entiy>(type, pos, name));
+}
+void AddFood(const Vector2D &pos, 25.0f)
+{
+    if (mFoodsources.size() < 500) // limite
+    {
+        mFoodsources.emplace_back(pos, 35.0f);
+    }
+}
 namespace Ecosystem
 {
     namespace Core
@@ -14,14 +40,14 @@ namespace Ecosystem
             // 🔒 ÉTAT INTERNE
             std::vector<std::unique_ptr<Entity>> mEntities;
             std::vector<Food> mFoodSources;
-            
+
             float mWorldWidth;
             float mWorldHeight;
             int mMaxEntities;
             int mDayCycle;
 
             // 🎲 Générateur aléatoire
-           
+
             std::mt19937 mRandomGenerator;
 
             // 📊 STATISTIQUES
@@ -52,7 +78,7 @@ namespace Ecosystem
             {
                 return mEntities.size();
             }
-            //Implémentation de la Classe Ecosystem 
+            // Implémentation de la Classe Ecosystem
             int GetFoodCount() const
             {
                 return mFoodSources.size();
@@ -76,7 +102,6 @@ namespace Ecosystem
 
             // 🎨 RENDU
             void Render(SDL_Renderer *renderer) const;
-           
 
         private:
             // 🔐 MÉTHODES PRIVÉES

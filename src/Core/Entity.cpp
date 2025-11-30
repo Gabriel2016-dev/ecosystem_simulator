@@ -81,7 +81,8 @@ namespace Ecosystem
         // 🚶 MOUVEMENT
         void Entity::Move(float deltaTime)
         {
-            if (mType == EntityType::PLANT){
+            if (mType == EntityType::PLANT)
+            {
                 return; // Les plantes ne bougent pas
             }
             Vector2D force(0, 0);
@@ -208,21 +209,27 @@ namespace Ecosystem
                 size,
                 size};
 
- SDL_SetRenderDrawColor(renderer, renderColor.r, renderColor.g, renderColor.b, renderColor.a);
- SDL_RenderFillRect(renderer, &rect);
- 
- // 🔵 Indicateur d'énergie (barre de vie)
- if (mType != EntityType::PLANT) {
+            SDL_SetRenderDrawColor(renderer, renderColor.r, renderColor.g, renderColor.b, renderColor.a);
+            SDL_RenderFillRect(renderer, &rect);
+
+            // 🔵 Indicateur d'énergie (barre de vie)
+            if (mType != EntityType::PLANT)
+            {
                 float energyBarWidth = size * GetEnergyPercentage();
                 SDL_FRect energyBar = {
                     position.x - size / 2.0f,
                     position.y - size / 2.0f - 3.0f,
                     energyBarWidth,
-                    2.0f
-                };
+                    2.0f};
                 SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
                 SDL_RenderFillRect(renderer, &energyBar);
-           }
+            }
         }
+        Vector2D force(0, 0);
+        force += seekfood(*mEcosystem);
+        force += AvoidPredators(*mEcosystem);
+        force += StayInBounds(*mEcosystem);
+        ApplyForce(force);
+
     } // namespace Core
 } // namespace Ecosystem

@@ -27,6 +27,10 @@ namespace Ecosystem
 
             std::cout << "✅ Moteur de jeu initialisé" << std::endl;
             return true;
+
+            mEcosystem.AddEntity(EntityType::HERBIVORE, {200, 200}, "Lapin1");
+            mEcosystem.AddEntity(EntityType::CARNIVORE, {400, 200}, "Loup1");
+            mEcosystem.AddFood({200, 300});
         }
         // 🎮 BOUCLE PRINCIPALE
         void GameEngine::Run()

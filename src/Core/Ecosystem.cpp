@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include <string>
 namespace Ecosystem
 {
     namespace Core
@@ -47,6 +48,14 @@ namespace Ecosystem
             SpawnFood(20);
 
             std::cout << "🌱 Écosystème initialisé avec " << mEntities.size() << " entités." << std::endl;
+        }
+        void Ecosystem::AddEntity(EntityType type, Vector2D pos, const std::string &name)
+        {
+            mEntities.push_back(std::make_unique<Entity>(type, pos, name));
+        }
+        void Ecosystem::AddFood(Vector2D pos)
+        {
+            mFoods.push_back(Food(pos)); // ou unique_ptr si tu préfères
         }
 
         // 🔄 MISE À JOUR
@@ -163,6 +172,30 @@ namespace Ecosystem
                 }
             }
         }
+        //Comportement des entites
+        void Ecosystem::Update(float dt)
+        {
+            for (auto &e : mEntities)
+            {
+                if (!e->IsAlive())
+                    continue;
+
+                e->Update(dt);
+
+                // 👶 Reproduction
+                if (e->CanReproduce())
+                {
+                    auto baby = e->Reproduce();
+                    if (baby)
+                        mEntities.push_back(std::move(baby));
+                }
+
+                // 🍃 Collision nourriture
+                HandleFoodConsumption(*e);
+            }
+
+            RemoveDeadEntities();
+        }
         // 🎲 CRÉATION D'ENTITÉ ALÉATOIRE
         void Ecosystem::SpawnRandomEntity(EntityType type)
         {
@@ -225,6 +258,6 @@ namespace Ecosystem
                 entity->Render(renderer);
             }
         }
-       
+
     } // namespace Core
 } // namespace Ecosystem
